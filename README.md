@@ -77,7 +77,7 @@ nepaliword 123.45 --lang np
 nepaliword -123 --lang np
 # → -एक सय तेइस
 
-# Format numbers (coming soon)
+# Format numbers
 nepaliformat 1000000
 # → 10,00,000
 ```
