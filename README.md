@@ -1,7 +1,7 @@
 
 # 🇳🇵 nepali-num2word
 
-Convert numbers into **Nepali-style currency words** — supports both **English transliteration** (e.g., "one lakh twenty thousand") and **Nepali Unicode** (e.g., "एक लाख बीस हजार").
+Convert numbers into **Nepali-style currency words** — supports both **English transliteration** (e.g., "one lakh twenty thousand") and **Nepali Unicode** (e.g., "एक लाख बीस हजार"). **Full Nepali language support now implemented!**
 
 ---
 
@@ -10,7 +10,7 @@ Convert numbers into **Nepali-style currency words** — supports both **English
 - ✅ Convert integer and float to Nepali-style number words  
 - ✅ Supports **crore**, **lakh**, **thousand**, **hundred** grouping  
 - ✅ Handles **decimal amounts** → outputs **rupees** and **paise**  
-- ✅ Supports **Nepali Unicode output**  
+- ✅ **Full Nepali Unicode support** with authentic Devanagari words
 - ✅ Provides **CLI command**: `nepaliword <number> --lang en|np`  
 - ✅ Easy-to-use Python function: `convert_to_words(number, lang='en')`
 - ✅ **NEW**: Format numbers with Nepali-style comma separation: `format_number(1000000)` → `10,00,000`
@@ -47,7 +47,7 @@ print(convert_to_words(34000000))            # → three crore forty lakh
 print(convert_to_words(123.45))              # → one hundred twenty-three rupees and forty-five paise
 
 print(convert_to_words(120000, lang='np'))   # → एक लाख बीस हजार
-print(convert_to_words(123.45, lang='np'))   # → एक सय तेइस रुपैयाँ र पैंतालीस पैसा
+print(convert_to_words(123.45, lang='np'))   # → एक सय तेइस रुपैयाँ र पैँतालीस पैसा
 
 # Format numbers with Nepali-style commas
 print(format_number(1000000))                # → 10,00,000
