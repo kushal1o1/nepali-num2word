@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Simple test runner for nepali-num2word package.
 Run this to quickly test core functionality without pytest.
@@ -62,17 +61,34 @@ def test_language_parameter():
 
 
 def test_format_function():
-    """Test format_number function (not implemented)."""
+    """Test format_number function."""
     print("\n🔢 Testing Format Function")
     print("=" * 40)
     
-    result = format_number(1000000)
-    if result is None:
-        print("✅ format_number returns None (not implemented)")
-        return True
-    else:
-        print(f"❌ format_number returned: {result} (expected None)")
-        return False
+    test_cases = [
+        (1000000, "10,00,000"),
+        (120000, "1,20,000"),
+        (123.45, "123.45"),
+        (34000000, "3,40,00,000"),
+        (100, "100"),
+        (0, "0"),
+        (-120000, "-1,20,000"),
+    ]
+    
+    passed = 0
+    failed = 0
+    
+    for number, expected in test_cases:
+        result = format_number(number)
+        if result == expected:
+            print(f"✅ format_number({number}) -> {result}")
+            passed += 1
+        else:
+            print(f"❌ format_number({number}) -> {result} (expected: {expected})")
+            failed += 1
+    
+    print(f"📊 Format Tests: {passed} passed, {failed} failed")
+    return failed == 0
 
 
 def main():

@@ -55,18 +55,26 @@ class TestConvertToWords:
             (11, "eleven"),
             (12, "twelve"),
             (13, "thirteen"),
+            (14, "fourteen"),
             (15, "fifteen"),
+            (16, "sixteen"),
+            (17, "seventeen"),
+            (18, "eighteen"),
             (19, "nineteen")
         ]
         for number, expected in test_cases:
             assert convert_to_words(number) == expected
     
     def test_tens_numbers(self):
-        """Test tens numbers (20, 30, etc.)."""
+        """Test tens numbers (10, 20, 30, etc.)."""
         test_cases = [
+            (10, "ten"),
             (20, "twenty"),
             (30, "thirty"),
+            (40, "forty"),
             (50, "fifty"),
+            (60, "sixty"),
+            (70, "seventy"),
             (80, "eighty"),
             (90, "ninety")
         ]
@@ -112,17 +120,52 @@ class TestConvertToWords:
 class TestFormatNumber:
     """Test cases for format_number function."""
     
-    def test_format_number_not_implemented(self):
-        """Test that format_number is not yet implemented."""
-        result = format_number(1000000)
-        assert result is None
-    
-    def test_format_number_various_inputs(self):
-        """Test format_number with various inputs (should all return None for now)."""
-        test_numbers = [120000, 1000000, 123.45, 0, 1]
-        for number in test_numbers:
+    def test_format_number_basic_cases(self):
+        """Test format_number with basic cases."""
+        test_cases = [
+            (1000000, "10,00,000"),
+            (120000, "1,20,000"),
+            (34000000, "3,40,00,000"),
+            (1000, "1,000"),
+            (100, "100"),
+            (10, "10"),
+            (0, "0"),
+            (99999, "99,999"),
+            (100000, "1,00,000"),
+            (999999, "9,99,999"),
+            (10000000, "1,00,00,000"),
+        ]
+        
+        for number, expected in test_cases:
             result = format_number(number)
-            assert result is None
+            assert result == expected, f"format_number({number}) should return '{expected}', got '{result}'"
+    
+    def test_format_number_decimals(self):
+        """Test format_number with decimal numbers."""
+        test_cases = [
+            (123.45, "123.45"),
+            (123.0, "123"),  # Whole number decimal should format as integer
+            (0.45, "0.45"),
+            (1000000.50, "10,00,000.5"),
+            (120000.123, "1,20,000.123"),
+        ]
+        
+        for number, expected in test_cases:
+            result = format_number(number)
+            assert result == expected, f"format_number({number}) should return '{expected}', got '{result}'"
+    
+    def test_format_number_negative(self):
+        """Test format_number with negative numbers."""
+        test_cases = [
+            (-120000, "-1,20,000"),
+            (-1000000, "-10,00,000"),
+            (-123.45, "-123.45"),
+            (-100, "-100"),
+        ]
+        
+        for number, expected in test_cases:
+            result = format_number(number)
+            assert result == expected, f"format_number({number}) should return '{expected}', got '{result}'"
 
 
 class TestEdgeCases:
