@@ -12,10 +12,12 @@ Convert numbers into **Nepali-style currency words** — supports both **English
 - ✅ Handles **decimal amounts** → outputs **rupees** and **paise**  
 - ✅ **Negative number support** → prefixed with "-" sign
 - ✅ **Robust error handling** → clear error messages for invalid inputs
+- ✅ **Compact number formatting** → human-readable format like "1.2 lakhs", "4.5 crores"
 - ✅ **Full Nepali Unicode support** with authentic Devanagari words
 - ✅ Provides **CLI command**: `nepaliword <number> --lang en|np`  
 - ✅ Easy-to-use Python function: `convert_to_words(number, lang='en')`
 - ✅ **NEW**: Format numbers with Nepali-style comma separation: `format_number(1000000)` → `10,00,000`
+- ✅ **NEW**: Compact number representation: `compact_number(4200000)` → `42 lakhs`
 
 ---
 
