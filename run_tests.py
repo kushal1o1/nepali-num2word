@@ -53,11 +53,12 @@ def test_language_parameter():
     result_en = convert_to_words(120000, lang='en')
     print(f"✅ English: {result_en}")
     
-    # Test Nepali (falls back to English for now)
+    # Test Nepali (now implemented)
     result_np = convert_to_words(120000, lang='np')
-    print(f"✅ Nepali (fallback): {result_np}")
+    print(f"✅ Nepali: {result_np}")
     
-    return result_en == result_np == "one lakh twenty thousand"
+    # Verify they're different (English vs Nepali)
+    return result_en == "one lakh twenty thousand" and result_np == "एक लाख बीस हजार"
 
 
 def test_format_function():

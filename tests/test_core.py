@@ -28,10 +28,34 @@ class TestConvertToWords:
         assert result == expected
     
     def test_language_parameter_nepali_fallback(self):
-        """Test language parameter with Nepali (should fallback to English for now)."""
+        """Test language parameter with Nepali (now implemented)."""
         result = convert_to_words(120000, lang='np')
-        expected = "one lakh twenty thousand"  # Falls back to English
+        expected = "एक लाख बीस हजार"  # Now returns actual Nepali
         assert result == expected
+    
+    def test_nepali_basic_numbers(self):
+        """Test basic Nepali number conversion."""
+        test_cases = [
+            (9, "नौ"),
+            (25, "पच्चिस"),
+            (67, "सतसट्ठी"),
+            (99, "उनान्सय"),
+            (123, "एक सय तेइस"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number, lang='np')
+            assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
+    
+    def test_nepali_currency(self):
+        """Test Nepali currency formatting."""
+        test_cases = [
+            (123.45, "एक सय तेइस रुपैयाँ र पैँतालीस पैसा"),
+            (1.01, "एक रुपैयाँ र एक पैसा"),
+            (67.89, "सतसट्ठी रुपैयाँ र उनान्नब्बे पैसा"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number, lang='np')
+            assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
     
     def test_zero_cases(self):
         """Test various zero cases."""
