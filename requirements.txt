@@ -1,0 +1,6 @@
+# Core dependencies
+# (none currently - uses only Python standard library)
+
+# Development dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
