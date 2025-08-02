@@ -1,0 +1,1 @@
+# nepali-num2word
