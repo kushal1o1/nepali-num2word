@@ -10,8 +10,14 @@ TENS = [
     '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'
 ]
 
-def convert_to_words(number):
+def convert_to_words(number, lang='en'):
     """Convert a number to words in Nepali-style format (crore, lakh, thousand)"""
+    # For now, only English is implemented
+    if lang == 'np':
+        # TODO: Implement Nepali Unicode support
+        pass
+        # For now, fallback to English
+    
     # Handle decimal numbers (rupees and paise)
     if isinstance(number, float) or '.' in str(number):
         if isinstance(number, str):
