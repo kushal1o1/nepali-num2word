@@ -184,10 +184,59 @@ def format_number(number):
         '1,20,000'
         >>> format_number(123.45)
         '123.45'
-    
-    Note:
-        This function is currently not implemented and returns None.
-        Implementation is planned for future releases.
     """
-    # TODO: Implement Nepali-style number formatting
-    pass
+    # Handle string input
+    if isinstance(number, str):
+        try:
+            number = float(number) if '.' in number else int(number)
+        except ValueError:
+            return str(number)  # Return as-is if not a valid number
+    
+    # Handle decimal numbers
+    if isinstance(number, float):
+        if number == int(number):
+            # If it's a whole number (like 123.0), treat as integer
+            integer_part = int(number)
+            return _format_integer_part(integer_part)
+        else:
+            # Split into integer and decimal parts
+            integer_part = int(number)
+            decimal_part = str(number).split('.')[1]
+            
+            if integer_part == 0:
+                return f"0.{decimal_part}"
+            else:
+                formatted_integer = _format_integer_part(integer_part)
+                return f"{formatted_integer}.{decimal_part}"
+    
+    # Handle integer numbers
+    return _format_integer_part(number)
+
+
+def _format_integer_part(number):
+    """
+    Helper function to format the integer part with Nepali-style commas.
+    
+    Args:
+        number (int): The integer to format.
+    
+    Returns:
+        str: Formatted integer with Nepali-style commas.
+    """
+    if number == 0:
+        return "0"
+    
+    # Convert to string and reverse for easier processing
+    num_str = str(abs(number))
+    reversed_digits = num_str[::-1]
+    
+    # Add commas: first after 3 digits, then every 2 digits
+    result = []
+    for i, digit in enumerate(reversed_digits):
+        if i == 3 or (i > 3 and (i - 3) % 2 == 0):
+            result.append(',')
+        result.append(digit)
+    
+    # Reverse back and handle negative numbers
+    formatted = ''.join(result[::-1])
+    return f"-{formatted}" if number < 0 else formatted
