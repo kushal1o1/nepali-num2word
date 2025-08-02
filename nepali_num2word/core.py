@@ -1,3 +1,10 @@
+"""
+Core module for nepali-num2word package.
+
+This module provides functions to convert numbers to words in Nepali-style format
+and format numbers with Nepali-style comma separation.
+"""
+
 # Basic number words mapping (0-19)
 ONES = [
     'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
@@ -10,8 +17,30 @@ TENS = [
     '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'
 ]
 
+
 def convert_to_words(number, lang='en'):
-    """Convert a number to words in Nepali-style format (crore, lakh, thousand)"""
+    """
+    Convert a number to words in Nepali-style format (crore, lakh, thousand).
+    
+    Args:
+        number (int or float): The number to convert to words.
+                              Can be integer or float.
+        lang (str, optional): Language for output. 'en' for English, 'np' for Nepali.
+                              Defaults to 'en'. Currently only 'en' is implemented.
+    
+    Returns:
+        str: The number converted to words.
+             For integers: "one lakh twenty thousand"
+             For floats: "one hundred twenty-three rupees and forty-five paise"
+    
+    Examples:
+        >>> convert_to_words(120000)
+        'one lakh twenty thousand'
+        >>> convert_to_words(123.45)
+        'one hundred twenty-three rupees and forty-five paise'
+        >>> convert_to_words(120000, lang='np')
+        'one lakh twenty thousand'  # Falls back to English for now
+    """
     # For now, only English is implemented
     if lang == 'np':
         # TODO: Implement Nepali Unicode support
@@ -54,11 +83,23 @@ def convert_to_words(number, lang='en'):
     return convert_integer_to_words(number)
 
 def convert_integer_to_words(number):
-    """Convert an integer to words in Nepali-style format (crore, lakh, thousand)"""
+    """
+    Convert an integer to words in Nepali-style format (crore, lakh, thousand).
+    
+    Args:
+        number (int): The integer to convert to words.
+    
+    Returns:
+        str: The integer converted to words using Nepali-style grouping.
+    
+    Examples:
+        >>> convert_integer_to_words(120000)
+        'one lakh twenty thousand'
+        >>> convert_integer_to_words(34000000)
+        'three crore forty lakh'
+    """
     if number == 0:
         return 'zero'
-    
-    result = []
     
     result = []
     
@@ -93,7 +134,23 @@ def convert_integer_to_words(number):
     return ' '.join(result)
 
 def basic_number_to_words(number):
-    """Convert basic numbers (1-99) to words"""
+    """
+    Convert basic numbers (1-99) to words.
+    
+    Args:
+        number (int): The number to convert (should be between 0-99).
+    
+    Returns:
+        str: The number converted to words.
+    
+    Examples:
+        >>> basic_number_to_words(25)
+        'twenty-five'
+        >>> basic_number_to_words(15)
+        'fifteen'
+        >>> basic_number_to_words(90)
+        'ninety'
+    """
     if number < 20:
         return ONES[number]
     elif number < 100:
@@ -106,6 +163,31 @@ def basic_number_to_words(number):
     return str(number)  # fallback
 
 def format_number(number):
-    """Format a number with Nepali-style comma separation (e.g., 10,00,000)"""
+    """
+    Format a number with Nepali-style comma separation.
+    
+    In Nepali numbering system, commas are placed differently than Western style:
+    - First comma after 3 digits from the right
+    - Then every 2 digits thereafter
+    - Example: 1000000 becomes 10,00,000 (not 1,000,000)
+    
+    Args:
+        number (int or float): The number to format.
+    
+    Returns:
+        str: The formatted number string with Nepali-style comma placement.
+        
+    Examples:
+        >>> format_number(1000000)
+        '10,00,000'
+        >>> format_number(120000)
+        '1,20,000'
+        >>> format_number(123.45)
+        '123.45'
+    
+    Note:
+        This function is currently not implemented and returns None.
+        Implementation is planned for future releases.
+    """
     # TODO: Implement Nepali-style number formatting
     pass
