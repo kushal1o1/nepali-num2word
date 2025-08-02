@@ -3,7 +3,7 @@ Tests for the core functionality of nepali-num2word package.
 """
 
 import pytest
-from nepali_num2word import convert_to_words, format_number
+from nepali_num2word import convert_to_words, format_number, compact_number
 
 
 class TestConvertToWords:
@@ -339,6 +339,155 @@ class TestErrorHandling:
         assert convert_to_words("-123") == "-one hundred twenty-three"
         assert convert_to_words("0") == "zero"
         assert convert_to_words("0.0") == "zero"
+
+
+class TestCompactNumber:
+    """Test cases for compact_number function."""
+    
+    def test_basic_numbers(self):
+        """Test basic number compacting in English."""
+        test_cases = [
+            (0, "0"),
+            (999, "999"),
+            (1000, "1 thousand"),
+            (1500, "1.5 thousand"),
+            (10000, "10 thousand"),
+            (50000, "50 thousand"),
+            (99000, "99 thousand"),
+        ]
+        for number, expected in test_cases:
+            result = compact_number(number)
+            assert result == expected, f"compact_number({number}) should return '{expected}', got '{result}'"
+    
+    def test_lakhs(self):
+        """Test lakh compacting in English."""
+        test_cases = [
+            (100000, "1 lakh"),
+            (150000, "1.5 lakhs"),
+            (500000, "5 lakhs"),
+            (1000000, "10 lakhs"),
+            (4200000, "42 lakhs"),
+            (9900000, "99 lakhs"),
+        ]
+        for number, expected in test_cases:
+            result = compact_number(number)
+            assert result == expected, f"compact_number({number}) should return '{expected}', got '{result}'"
+    
+    def test_crores(self):
+        """Test crore compacting in English."""
+        test_cases = [
+            (10000000, "1 crore"),
+            (42000000, "4.2 crores"),
+            (100000000, "10 crores"),
+            (500000000, "50 crores"),
+        ]
+        for number, expected in test_cases:
+            result = compact_number(number)
+            assert result == expected, f"compact_number({number}) should return '{expected}', got '{result}'"
+    
+    def test_auto_trim_decimals(self):
+        """Test auto-trimming of .0 decimals."""
+        test_cases = [
+            (4000000, "40 lakhs"),  # 40.0 lakhs -> 40 lakhs
+            (10000000, "1 crore"),   # 1.0 crore -> 1 crore
+            (50000000, "5 crores"),  # 5.0 crores -> 5 crores
+        ]
+        for number, expected in test_cases:
+            result = compact_number(number)
+            assert result == expected, f"compact_number({number}) should return '{expected}', got '{result}'"
+    
+    def test_nepali_language(self):
+        """Test compact number in Nepali language."""
+        test_cases = [
+            (999, "९९९"),
+            (1500, "१.५ हजार"),
+            (100000, "१ लाख"),
+            (150000, "१.५ लाख"),
+            (4200000, "४२ लाख"),
+            (42000000, "४.२ करोड"),
+            (100000000, "१० करोड"),
+        ]
+        for number, expected in test_cases:
+            result = compact_number(number, lang='np')
+            assert result == expected, f"compact_number({number}, lang='np') should return '{expected}', got '{result}'"
+    
+    def test_negative_numbers(self):
+        """Test compact number with negative values."""
+        test_cases = [
+            (-999, "-999"),
+            (-1500, "-1.5 thousand"),
+            (-100000, "-1 lakh"),
+            (-4200000, "-42 lakhs"),
+            (-42000000, "-4.2 crores"),
+        ]
+        for number, expected in test_cases:
+            result = compact_number(number)
+            assert result == expected, f"compact_number({number}) should return '{expected}', got '{result}'"
+    
+    def test_precision_parameter(self):
+        """Test custom precision parameter."""
+        test_cases = [
+            (4230000, 0, "42 lakhs"),    # 0 precision
+            (4230000, 1, "42.3 lakhs"),  # 1 precision (default)
+            (4230000, 2, "42.3 lakhs"),  # 2 precision (auto-trim)
+            (4235000, 2, "42.35 lakhs"), # 2 precision with actual decimals
+        ]
+        for number, precision, expected in test_cases:
+            result = compact_number(number, precision=precision)
+            assert result == expected, f"compact_number({number}, precision={precision}) should return '{expected}', got '{result}'"
+    
+    def test_string_inputs(self):
+        """Test valid string number inputs."""
+        test_cases = [
+            ("100000", "1 lakh"),
+            ("1500", "1.5 thousand"),
+            ("42000000", "4.2 crores"),
+        ]
+        for number_str, expected in test_cases:
+            result = compact_number(number_str)
+            assert result == expected, f"compact_number('{number_str}') should return '{expected}', got '{result}'"
+    
+    def test_singular_plural(self):
+        """Test singular vs plural forms in English."""
+        test_cases = [
+            (1000, "1 thousand"),     # singular
+            (2000, "2 thousand"),     # plural (no 's' for thousand)
+            (100000, "1 lakh"),       # singular
+            (200000, "2 lakhs"),      # plural
+            (10000000, "1 crore"),    # singular
+            (20000000, "2 crores"),   # plural
+        ]
+        for number, expected in test_cases:
+            result = compact_number(number)
+            assert result == expected, f"compact_number({number}) should return '{expected}', got '{result}'"
+
+
+class TestCompactNumberErrors:
+    """Test error handling for compact_number function."""
+    
+    def test_invalid_types(self):
+        """Test error handling for invalid input types."""
+        with pytest.raises(TypeError, match="Number cannot be None"):
+            compact_number(None)
+        
+        with pytest.raises(TypeError, match="Boolean values are not supported"):
+            compact_number(True)
+        
+        with pytest.raises(TypeError, match="Unsupported type: list"):
+            compact_number([])
+    
+    def test_invalid_strings(self):
+        """Test error handling for invalid string inputs."""
+        with pytest.raises(ValueError, match="Empty string is not a valid number"):
+            compact_number("")
+        
+        with pytest.raises(ValueError, match="'hello' is not a valid number"):
+            compact_number("hello")
+    
+    def test_large_numbers(self):
+        """Test error handling for numbers too large."""
+        with pytest.raises(ValueError, match="Number 1000000000 is too large"):
+            compact_number(1000000000)
 
 
 class TestEdgeCases:

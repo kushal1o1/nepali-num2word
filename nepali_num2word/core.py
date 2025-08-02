@@ -334,3 +334,139 @@ def _format_integer_part(number):
     # Reverse back and handle negative numbers
     formatted = ''.join(result[::-1])
     return f"-{formatted}" if number < 0 else formatted
+
+
+def compact_number(number, precision=1, lang='en'):
+    """
+    Convert numbers to compact, human-readable format using Nepali-style scales.
+    
+    Args:
+        number (int or float): The number to convert.
+        precision (int, optional): Decimal places to show (default: 1). 
+                                 Auto-trims .0 for whole numbers.
+        lang (str, optional): Language for output. 'en' for English, 'np' for Nepali.
+                              Defaults to 'en'.
+    
+    Returns:
+        str: Compact representation like "1.2 lakhs", "4.5 crores", "१.२ लाख"
+    
+    Raises:
+        TypeError: If number is not a valid numeric type.
+        ValueError: If number cannot be converted to a numeric value.
+    
+    Examples:
+        >>> compact_number(999)
+        '999'
+        >>> compact_number(1500)
+        '1.5 thousand'
+        >>> compact_number(100000)
+        '1 lakh'
+        >>> compact_number(4200000)
+        '4.2 crores'
+        >>> compact_number(4000000)
+        '4 crores'
+        >>> compact_number(100000, lang='np')
+        '१ लाख'
+        >>> compact_number(4200000, lang='np')
+        '४.२ करोड'
+    """
+    # Type validation (reuse same validation as convert_to_words)
+    if number is None:
+        raise TypeError("Number cannot be None")
+    
+    # Handle string inputs
+    if isinstance(number, str):
+        if number.strip() == '':
+            raise ValueError("Empty string is not a valid number")
+        try:
+            if '.' in number:
+                number = float(number)
+            else:
+                number = int(number)
+        except ValueError:
+            raise ValueError(f"'{number}' is not a valid number")
+    
+    # Handle boolean values
+    if isinstance(number, bool):
+        raise TypeError(f"Boolean values are not supported. Use 0 or 1 instead of {number}")
+    
+    # Check if it's a valid numeric type
+    if not isinstance(number, (int, float)):
+        raise TypeError(f"Unsupported type: {type(number).__name__}. Expected int, float, or numeric string")
+    
+    # Validate numeric range
+    if abs(number) > 999999999:
+        raise ValueError(f"Number {number} is too large. Maximum supported: 999,999,999")
+    
+    # Handle negative numbers
+    if number < 0:
+        positive_result = compact_number(abs(number), precision, lang)
+        return f"-{positive_result}"
+    
+    # Handle zero
+    if number == 0:
+        return 'शून्य' if lang == 'np' else '0'
+    
+    # Determine scale and value
+    if number >= 10000000:  # >= 1 crore
+        value = number / 10000000
+        scale = 'करोड' if lang == 'np' else 'crores'
+    elif number >= 1000000:  # >= 10 lakhs - decide between crores and lakhs
+        crore_value = number / 10000000
+        lakh_value = number / 100000
+        
+        # Use crores only if it results in a cleaner representation (>= 1 crore)
+        if crore_value >= 1:
+            value = crore_value
+            scale = 'करोड' if lang == 'np' else 'crores'
+        else:
+            value = lakh_value
+            scale = 'लाख' if lang == 'np' else 'lakhs'
+    elif number >= 100000:  # >= 1 lakh
+        value = number / 100000
+        scale = 'लाख' if lang == 'np' else 'lakhs'
+    elif number >= 1000:    # >= 1 thousand
+        value = number / 1000
+        scale = 'हजार' if lang == 'np' else 'thousand'
+    else:                   # < 1000
+        # Return as-is for numbers less than 1000
+        if lang == 'np':
+            return _convert_digits_to_nepali(str(int(number)))
+        else:
+            return str(int(number))
+    
+    # Format the value with specified precision
+    if value == int(value):
+        # Whole number - don't show decimal
+        formatted_value = str(int(value))
+    else:
+        # Decimal number - format with precision and trim trailing zeros
+        formatted_value = f"{value:.{precision}f}".rstrip('0').rstrip('.')
+    
+    # Convert digits to Nepali if needed
+    if lang == 'np':
+        formatted_value = _convert_digits_to_nepali(formatted_value)
+    
+    # Handle singular vs plural for English
+    if lang == 'en':
+        if scale in ['crores', 'lakhs'] and float(formatted_value) == 1:
+            scale = scale[:-1]  # Remove 's' for singular (crore, lakh)
+    
+    return f"{formatted_value} {scale}"
+
+
+def _convert_digits_to_nepali(text):
+    """
+    Convert Western digits (0-9) to Nepali digits (०-९) in a string.
+    
+    Args:
+        text (str): Text containing Western digits.
+    
+    Returns:
+        str: Text with Nepali digits.
+    """
+    nepali_digits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']
+    result = text
+    for i, nepali_digit in enumerate(nepali_digits):
+        result = result.replace(str(i), nepali_digit)
+    return result

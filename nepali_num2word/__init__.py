@@ -8,13 +8,14 @@ Nepali-style comma separation.
 Main functions:
     convert_to_words: Convert numbers to words
     format_number: Format numbers with Nepali-style commas
+    compact_number: Convert numbers to compact, human-readable format
 """
 
-from .core import convert_to_words, format_number
+from .core import convert_to_words, format_number, compact_number
 
 __version__ = "0.1.0"
 __author__ = "Kushal"
 __email__ = "your.email@example.com"
 
-__all__ = ['convert_to_words', 'format_number']
+__all__ = ['convert_to_words', 'format_number', 'compact_number']
 
