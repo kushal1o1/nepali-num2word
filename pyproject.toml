@@ -25,7 +25,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Text Processing :: Linguistic",
-    "Topic :: Internationalization",
 ]
 keywords = ["nepali", "numbers", "words", "conversion", "currency", "formatting", "unicode", "devanagari"]
 

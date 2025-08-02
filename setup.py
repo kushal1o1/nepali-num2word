@@ -9,9 +9,16 @@ from pathlib import Path
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text(encoding='utf-8')
 
-# Read version from package
-import nepali_num2word
-version = nepali_num2word.__version__
+# Read version from __init__.py file without importing
+def get_version():
+    version_file = this_directory / "nepali_num2word" / "__init__.py"
+    version_content = version_file.read_text(encoding='utf-8')
+    for line in version_content.split('\n'):
+        if line.startswith('__version__'):
+            return line.split('=')[1].strip().strip('"').strip("'")
+    raise RuntimeError("Unable to find version string.")
+
+version = get_version()
 
 setup(
     name="nepali-num2word",
@@ -24,7 +31,7 @@ setup(
     url="https://github.com/kushal1o1/nepali-num2word",
     packages=find_packages(),
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
