@@ -46,7 +46,7 @@ def convert_to_words(number, lang='en'):
     
     Args:
         number (int or float): The number to convert to words.
-                              Can be integer or float.
+                              Can be integer or float, including negative numbers.
         lang (str, optional): Language for output. 'en' for English, 'np' for Nepali.
                               Defaults to 'en'. Both languages are now supported.
     
@@ -55,6 +55,7 @@ def convert_to_words(number, lang='en'):
              For integers: "one lakh twenty thousand" or "एक लाख बीस हजार"
              For floats: "one hundred twenty-three rupees and forty-five paise" 
                         or "एक सय तेइस रुपैयाँ र पैँतालीस पैसा"
+             For negatives: "-one hundred twenty-three" or "-एक सय तेइस"
     
     Examples:
         >>> convert_to_words(120000)
@@ -65,7 +66,14 @@ def convert_to_words(number, lang='en'):
         'one hundred twenty-three rupees and forty-five paise'
         >>> convert_to_words(123.45, lang='np')
         'एक सय तेइस रुपैयाँ र पैँतालीस पैसा'
+        >>> convert_to_words(-123, lang='np')
+        '-एक सय तेइस'
     """
+    # Handle negative numbers
+    if number < 0:
+        positive_result = convert_to_words(abs(number), lang)
+        return f"-{positive_result}"
+    
     # Handle decimal numbers (rupees and paise)
     if isinstance(number, float) or '.' in str(number):
         if isinstance(number, str):
@@ -75,7 +83,7 @@ def convert_to_words(number, lang='en'):
         decimal_part = round((number - integer_part) * 100)
         
         if integer_part == 0 and decimal_part == 0:
-            return 'zero'
+            return 'शून्य' if lang == 'np' else 'zero'
         
         result_parts = []
         

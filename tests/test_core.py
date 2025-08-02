@@ -57,6 +57,95 @@ class TestConvertToWords:
             result = convert_to_words(number, lang='np')
             assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
     
+    def test_nepali_large_numbers(self):
+        """Test Nepali large number conversion."""
+        test_cases = [
+            (1000, "एक हजार"),
+            (10000, "दश हजार"),
+            (100000, "एक लाख"),
+            (1000000, "दश लाख"),
+            (10000000, "एक करोड"),
+            (12345678, "एक करोड तेइस लाख पैँतालीस हजार छ सय अठहत्तर"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number, lang='np')
+            assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
+    
+    def test_nepali_edge_cases(self):
+        """Test Nepali edge cases with zeros."""
+        test_cases = [
+            (1002, "एक हजार दुई"),
+            (1020, "एक हजार बीस"),
+            (1200, "एक हजार दुई सय"),
+            (10002, "दश हजार दुई"),
+            (100200, "एक लाख दुई सय"),
+            (2030, "दुई हजार तीस"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number, lang='np')
+            assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
+    
+    def test_nepali_negative_numbers(self):
+        """Test Nepali negative number conversion."""
+        test_cases = [
+            (-123, "-एक सय तेइस"),
+            (-1234, "-एक हजार दुई सय चौँतीस"),
+            (-123.45, "-एक सय तेइस रुपैयाँ र पैँतालीस पैसा"),
+            (-100000, "-एक लाख"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number, lang='np')
+            assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
+    
+    def test_nepali_zero_cases(self):
+        """Test Nepali zero cases."""
+        test_cases = [
+            (0, "शून्य"),
+            (0.0, "शून्य"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number, lang='np')
+            assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
+    
+    def test_nepali_compound_numbers(self):
+        """Test Nepali compound numbers (0-99 direct lookup)."""
+        test_cases = [
+            (21, "एक्काइस"),
+            (33, "तेत्तीस"),
+            (45, "पैँतालीस"),
+            (67, "सतसट्ठी"),
+            (89, "उनान्नब्बे"),
+            (99, "उनान्सय"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number, lang='np')
+            assert result == expected, f"convert_to_words({number}, lang='np') should return '{expected}', got '{result}'"
+
+
+class TestNegativeNumbers:
+    """Test cases for negative numbers in both languages."""
+    
+    def test_negative_integers_english(self):
+        """Test negative integer conversion in English."""
+        test_cases = [
+            (-123, "-one hundred twenty-three"),
+            (-1000, "-one thousand"),
+            (-120000, "-one lakh twenty thousand"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number)
+            assert result == expected, f"convert_to_words({number}) should return '{expected}', got '{result}'"
+    
+    def test_negative_decimals_english(self):
+        """Test negative decimal conversion in English."""
+        test_cases = [
+            (-123.45, "-one hundred twenty-three rupees and forty-five paise"),
+            (-1.01, "-one rupee and one paisa"),
+        ]
+        for number, expected in test_cases:
+            result = convert_to_words(number)
+            assert result == expected, f"convert_to_words({number}) should return '{expected}', got '{result}'"
+    
     def test_zero_cases(self):
         """Test various zero cases."""
         assert convert_to_words(0) == "zero"
