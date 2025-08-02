@@ -104,3 +104,8 @@ def basic_number_to_words(number):
         else:
             return f"{TENS[tens_digit]}-{ONES[ones_digit]}"
     return str(number)  # fallback
+
+def format_number(number):
+    """Format a number with Nepali-style comma separation (e.g., 10,00,000)"""
+    # TODO: Implement Nepali-style number formatting
+    pass
