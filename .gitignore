@@ -1,6 +1,12 @@
+# personal testing files ,Please let it be 
+NEPALI_IMPLEMENTATION_PLAN.md
+demo.py
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
 
 # C extensions
@@ -193,6 +199,28 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Package development
+*.whl
+dist/
+build/
+*.egg-info/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Cursor
 #  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to

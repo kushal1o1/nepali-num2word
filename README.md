@@ -1,7 +1,17 @@
 
 # 🇳🇵 nepali-num2word
 
-Convert numbers into **Nepali-style currency words** — supports both **English transliteration** (e.g., "one lakh twenty thousand") and **Nepali Unicode** (e.g., "एक लाख बीस हजार"). **Full Nepali language support now implemented!**
+Convert numbers into **Nepali-style currency words** — supports both **English transliteration** (e.g., "one lakh twenty thousand") ## 🛠 Roadmap
+
+- [x] Integer to words in Nepali format  
+- [x] Decimal (paise) support  
+- [x] Nepali Unicode output  
+- [x] CLI tool support  
+- [x] **NEW**: Nepali-style number formatting (10,00,000)
+- [x] **NEW**: Compact number representation (1.2 lakhs, 4.5 crores)
+- [x] **NEW**: Complete CLI suite (nepaliword, nepaliformat, nepalicompact)
+- [ ] More natural phrasing for compound numbers  
+- [ ] Reverse conversion (Nepali words → number)li Unicode** (e.g., "एक लाख बीस हजार"). **Full Nepali language support now implemented!**
 
 ---
 
@@ -79,9 +89,16 @@ nepaliword 123.45 --lang np
 nepaliword -123 --lang np
 # → -एक सय तेइस
 
-# Format numbers
+# Format numbers with Nepali-style commas
 nepaliformat 1000000
 # → 10,00,000
+
+# Compact number representation
+nepalicompact 4200000
+# → 42 lakhs
+
+nepalicompact 42000000 --lang np
+# → ४.२ करोड
 ```
 
 ---

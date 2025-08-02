@@ -7,7 +7,11 @@ Currently not implemented - returns None for all inputs.
 
 import argparse
 import sys
+import os
 from typing import Union
+
+# Add parent directory to path for importing nepali_num2word
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from nepali_num2word import format_number
 

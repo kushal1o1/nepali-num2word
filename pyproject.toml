@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nepali-num2word"
+version = "0.1.0"
+authors = [
+    {name = "Kushal", email = "work.kusal@gmail.com"},
+]
+description = "Convert numbers to Nepali-style words and formatting"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Internationalization",
+]
+keywords = ["nepali", "numbers", "words", "conversion", "currency", "formatting", "unicode", "devanagari"]
+
+[project.urls]
+Homepage = "https://github.com/kushal1o1/nepali-num2word"
+"Bug Reports" = "https://github.com/kushal1o1/nepali-num2word/issues"
+"Source" = "https://github.com/kushal1o1/nepali-num2word"
+
+[project.scripts]
+nepaliword = "cli.main:main"
+nepaliformat = "cli.format_main:main"
+nepalicompact = "cli.compact_main:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["nepali_num2word*", "cli*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
