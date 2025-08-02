@@ -1,7 +1,7 @@
 
 # 🇳🇵 nepali-num2word
 
-Convert numbers into **Nepali-style currency words** — supports both **English transliteration** (e.g., "one lakh twenty thousand") ## 🛠 Roadmap
+Convert numbers into **Nepali-style currency words** — supports both **English transliteration** (e.g., "one lakh twenty thousand") and **Nepali Unicode** (e.g., "एक ल## 🛠 Roadmap
 
 - [x] Integer to words in Nepali format  
 - [x] Decimal (paise) support  
@@ -11,7 +11,7 @@ Convert numbers into **Nepali-style currency words** — supports both **English
 - [x] **NEW**: Compact number representation (1.2 lakhs, 4.5 crores)
 - [x] **NEW**: Complete CLI suite (nepaliword, nepaliformat, nepalicompact)
 - [ ] More natural phrasing for compound numbers  
-- [ ] Reverse conversion (Nepali words → number)li Unicode** (e.g., "एक लाख बीस हजार"). **Full Nepali language support now implemented!**
+- [ ] Reverse conversion (Nepali words → number)र"). **Full Nepali language support now implemented!**
 
 ---
 
@@ -31,6 +31,29 @@ Convert numbers into **Nepali-style currency words** — supports both **English
 
 ---
 
+## 🚀 Quick Start
+
+```python
+# Install the package
+pip install nepali-num2word
+
+# Basic usage
+from nepali_num2word import convert_to_words, format_number, compact_number
+
+# Convert numbers to words
+convert_to_words(123456)                    # → "one lakh twenty-three thousand four hundred fifty-six"
+convert_to_words(123456, lang='np')         # → "एक लाख तेइस हजार चार सय छप्पन्न"
+
+# Format with Nepali-style commas  
+format_number(1234567)                      # → "12,34,567"
+
+# Compact representation
+compact_number(1234567)                     # → "12.3 lakhs"
+compact_number(12345678)                    # → "1.2 crores"
+```
+
+---
+
 ## 📦 Installation
 
 ```bash
@@ -41,7 +64,7 @@ pip install nepali-num2word
 For local testing:
 
 ```bash
-git clone https://github.com/yourname/nepali-num2word
+git clone https://github.com/kushal1o1/nepali-num2word
 cd nepali-num2word
 python cli/main.py 120000 --lang np
 ```
@@ -53,7 +76,7 @@ python cli/main.py 120000 --lang np
 ### ➤ Python Function
 
 ```python
-from nepali_num2word import convert_to_words, format_number
+from nepali_num2word import convert_to_words, format_number, compact_number
 
 # Convert to words
 print(convert_to_words(120000))              # → one lakh twenty thousand
@@ -72,6 +95,17 @@ print(format_number(1000000))                # → 10,00,000
 print(format_number(120000))                 # → 1,20,000
 print(format_number(34000000))               # → 3,40,00,000
 print(format_number(123.45))                 # → 123.45
+
+# Compact number representation
+print(compact_number(999))                   # → 999
+print(compact_number(1500))                  # → 1.5 thousand
+print(compact_number(100000))                # → 1 lakh
+print(compact_number(4200000))               # → 4.2 crores
+print(compact_number(42000000))              # → 42 crores
+
+print(compact_number(4200000, lang='np'))    # → ४२ लाख
+print(compact_number(42000000, lang='np'))   # → ४२ करोड
+print(compact_number(-1500000, lang='np'))   # → -१५ लाख
 ```
 
 ---
@@ -121,6 +155,30 @@ format_number(number: int | float) -> str
 
 - `number`: number to format with Nepali-style comma separation
 - Returns: formatted string with commas in Nepali style (e.g., `10,00,000`)
+
+### Compact Number Representation
+```python
+compact_number(number: int | float | str, lang='en') -> str
+```
+
+- `number`: number to convert to compact format (int, float, or numeric string)
+- `lang`: `'en'` for English (default), `'np'` for Nepali Unicode  
+- Returns: human-readable compact format (e.g., `"1.2 lakhs"`, `"4.5 crores"`)
+- **Raises**: `TypeError` for invalid types, `ValueError` for invalid values
+
+#### Compact Number Examples:
+```python
+compact_number(999)        # → "999"
+compact_number(1500)       # → "1.5 thousand" 
+compact_number(100000)     # → "1 lakh"
+compact_number(4200000)    # → "4.2 crores"
+compact_number(4000000)    # → "4 crores"  # Auto-trims .0
+
+# Nepali examples
+compact_number(100000, lang='np')   # → "१ लाख"
+compact_number(4200000, lang='np')  # → "४२ लाख"
+compact_number(42000000, lang='np') # → "४२ करोड"
+```
 
 ---
 
