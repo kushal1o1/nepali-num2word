@@ -281,6 +281,66 @@ class TestFormatNumber:
             assert result == expected, f"format_number({number}) should return '{expected}', got '{result}'"
 
 
+class TestErrorHandling:
+    """Test error handling for invalid inputs."""
+    
+    def test_none_input(self):
+        """Test that None input raises TypeError."""
+        with pytest.raises(TypeError, match="Number cannot be None"):
+            convert_to_words(None)
+    
+    def test_boolean_input(self):
+        """Test that boolean input raises TypeError."""
+        with pytest.raises(TypeError, match="Boolean values are not supported"):
+            convert_to_words(True)
+        
+        with pytest.raises(TypeError, match="Boolean values are not supported"):
+            convert_to_words(False)
+    
+    def test_invalid_string_input(self):
+        """Test that invalid string input raises ValueError."""
+        with pytest.raises(ValueError, match="'hello' is not a valid number"):
+            convert_to_words("hello")
+        
+        with pytest.raises(ValueError, match="'123abc' is not a valid number"):
+            convert_to_words("123abc")
+    
+    def test_empty_string_input(self):
+        """Test that empty string input raises ValueError."""
+        with pytest.raises(ValueError, match="Empty string is not a valid number"):
+            convert_to_words("")
+        
+        with pytest.raises(ValueError, match="Empty string is not a valid number"):
+            convert_to_words("   ")  # whitespace only
+    
+    def test_unsupported_type_input(self):
+        """Test that unsupported types raise TypeError."""
+        with pytest.raises(TypeError, match="Unsupported type: list"):
+            convert_to_words([])
+        
+        with pytest.raises(TypeError, match="Unsupported type: dict"):
+            convert_to_words({})
+        
+        with pytest.raises(TypeError, match="Unsupported type: set"):
+            convert_to_words(set())
+    
+    def test_large_number_input(self):
+        """Test that numbers too large raise ValueError."""
+        with pytest.raises(ValueError, match="Number 1000000000 is too large"):
+            convert_to_words(1000000000)
+        
+        with pytest.raises(ValueError, match="too large"):
+            convert_to_words(-1000000000)
+    
+    def test_valid_string_numbers(self):
+        """Test that valid string numbers work correctly."""
+        assert convert_to_words("123") == "one hundred twenty-three"
+        assert convert_to_words("123.45") == "one hundred twenty-three rupees and forty-five paise"
+        assert convert_to_words("-123") == "-one hundred twenty-three"
+        assert convert_to_words("0") == "zero"
+        assert convert_to_words("0.0") == "zero"
+
+
 class TestEdgeCases:
     """Test edge cases and error conditions."""
     

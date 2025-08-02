@@ -7,7 +7,11 @@ Supports both integer and float inputs with optional language parameter.
 
 import argparse
 import sys
+import os
 from typing import Union
+
+# Add parent directory to path for importing nepali_num2word
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from nepali_num2word import convert_to_words
 
@@ -71,6 +75,9 @@ def main() -> None:
         print(result)
     except ValueError as e:
         print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+    except TypeError as e:
+        print(f"Type Error: {e}", file=sys.stderr)
         sys.exit(1)
     except Exception as e:
         print(f"Unexpected error: {e}", file=sys.stderr)

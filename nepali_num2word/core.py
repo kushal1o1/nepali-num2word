@@ -57,6 +57,10 @@ def convert_to_words(number, lang='en'):
                         or "एक सय तेइस रुपैयाँ र पैँतालीस पैसा"
              For negatives: "-one hundred twenty-three" or "-एक सय तेइस"
     
+    Raises:
+        TypeError: If number is not a valid numeric type.
+        ValueError: If number cannot be converted to a numeric value.
+    
     Examples:
         >>> convert_to_words(120000)
         'one lakh twenty thousand'
@@ -69,6 +73,35 @@ def convert_to_words(number, lang='en'):
         >>> convert_to_words(-123, lang='np')
         '-एक सय तेइस'
     """
+    # Type validation and conversion
+    if number is None:
+        raise TypeError("Number cannot be None")
+    
+    # Handle string inputs - try to convert to number
+    if isinstance(number, str):
+        if number.strip() == '':
+            raise ValueError("Empty string is not a valid number")
+        try:
+            # Try to convert string to number
+            if '.' in number:
+                number = float(number)
+            else:
+                number = int(number)
+        except ValueError:
+            raise ValueError(f"'{number}' is not a valid number")
+    
+    # Handle boolean values explicitly (before numeric check since bool is subclass of int)
+    if isinstance(number, bool):
+        raise TypeError(f"Boolean values are not supported. Use 0 or 1 instead of {number}")
+    
+    # Check if it's a valid numeric type
+    if not isinstance(number, (int, float)):
+        raise TypeError(f"Unsupported type: {type(number).__name__}. Expected int, float, or numeric string")
+    
+    # Validate numeric range (optional - you can adjust these limits)
+    if abs(number) > 999999999:  # 99 crores limit
+        raise ValueError(f"Number {number} is too large. Maximum supported: 999,999,999")
+    
     # Handle negative numbers
     if number < 0:
         positive_result = convert_to_words(abs(number), lang)
