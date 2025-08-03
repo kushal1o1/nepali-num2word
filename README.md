@@ -3,7 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/nepali-num2word.svg)](https://badge.fury.io/py/nepali-num2word)
 [![Python Support](https://img.shields.io/pypi/pyversions/nepali-num2word.svg)](https://pypi.org/project/nepali-num2word/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Downloads](https://pepy.tech/badge/nepali-num2word)](https://pepy.tech/project/nepali-num2word)
+[![PyPI Downloads](https://static.pepy.tech/badge/nepali-num2word/month)](https://pepy.tech/projects/nepali-num2word)
 
 A comprehensive Python library for converting numbers to Nepali-style currency words with support for both English transliteration and Nepali Unicode (Devanagari script). Perfect for financial applications, educational tools, and any system requiring Nepali number formatting.
 
@@ -43,6 +43,10 @@ print(convert_to_words(123456, lang='np'))
 print(format_number(1234567))
 # Output: 12,34,567
 
+# Format with Nepali Unicode digits
+print(format_number(1234567, lang='np'))
+# Output: १२,३४,५६७
+
 # Compact representation
 print(compact_number(1234567))
 # Output: 12.3 lakhs
@@ -74,12 +78,13 @@ convert_to_words(120000, lang='np')         # "एक लाख बीस हज
 convert_to_words(123.45, lang='np')         # "एक सय तेइस रुपैयाँ र पैँतालीस पैसा"
 ```
 
-#### `format_number(number)`
+#### `format_number(number, lang='en')`
 
 Format numbers with Nepali-style comma separation.
 
 **Parameters:**
 - `number` (int | float): Number to format
+- `lang` (str): Language code - `'en'` for English digits, `'np'` for Nepali Unicode digits
 
 **Returns:** `str` - Formatted number string
 
@@ -88,6 +93,11 @@ Format numbers with Nepali-style comma separation.
 format_number(1000000)                      # "10,00,000"
 format_number(120000)                       # "1,20,000"
 format_number(34000000)                     # "3,40,00,000"
+
+# Nepali Unicode digits
+format_number(1000000, lang='np')           # "१०,००,०००"
+format_number(120000, lang='np')            # "१,२०,०००"
+format_number(123.45, lang='np')            # "१२३.४५"
 ```
 
 #### `compact_number(number, lang='en')`
@@ -130,6 +140,9 @@ nepaliword 123.45 --lang np
 ```bash
 nepaliformat 1000000
 # Output: 10,00,000
+
+nepaliformat 1000000 --lang np
+# Output: १०,००,०००
 ```
 
 #### `nepalicompact` - Compact number representation
