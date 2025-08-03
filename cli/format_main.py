@@ -51,9 +51,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description='Format numbers with Nepali-style comma separation.',
         epilog='Examples:\n'
-               '  %(prog)s 1000000  # Output: 10,00,000\n'
-               '  %(prog)s 120000   # Output: 1,20,000\n'
-               '  %(prog)s 123.45   # Output: 123.45',
+               '  %(prog)s 1000000           # Output: 10,00,000\n'
+               '  %(prog)s 1000000 --lang np # Output: १०,००,०००\n'
+               '  %(prog)s 120000            # Output: 1,20,000\n'
+               '  %(prog)s 123.45 --lang np  # Output: १२३.४५',
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     
@@ -63,11 +64,18 @@ def main() -> None:
         help='Number to format (integer or float)'
     )
     
+    parser.add_argument(
+        '--lang',
+        choices=['en', 'np'],
+        default='en',
+        help='Language for output: "en" for English digits, "np" for Nepali Unicode digits (default: en)'
+    )
+    
     args = parser.parse_args()
 
     try:
         number = parse_number(args.number)
-        result = format_number(number)
+        result = format_number(number, lang=args.lang)
         
         if result is None:
             print("Format function not yet implemented. Returns None.", file=sys.stderr)

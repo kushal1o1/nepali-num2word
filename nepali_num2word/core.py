@@ -256,7 +256,7 @@ def basic_number_to_words(number, lang='en'):
                 return f"{TENS[tens_digit]}-{ONES[ones_digit]}"
         return str(number)  # fallback
 
-def format_number(number):
+def format_number(number, lang='en'):
     """
     Format a number with Nepali-style comma separation.
     
@@ -267,6 +267,8 @@ def format_number(number):
     
     Args:
         number (int or float): The number to format.
+        lang (str, optional): Language for output. 'en' for English digits, 'np' for Nepali Unicode digits.
+                              Defaults to 'en'.
     
     Returns:
         str: The formatted number string with Nepali-style comma placement.
@@ -274,10 +276,16 @@ def format_number(number):
     Examples:
         >>> format_number(1000000)
         '10,00,000'
+        >>> format_number(1000000, lang='np')
+        '१०,००,०००'
         >>> format_number(120000)
         '1,20,000'
+        >>> format_number(120000, lang='np')
+        '१,२०,०००'
         >>> format_number(123.45)
         '123.45'
+        >>> format_number(123.45, lang='np')
+        '१२३.४५'
     """
     # Handle string input
     if isinstance(number, str):
@@ -291,20 +299,24 @@ def format_number(number):
         if number == int(number):
             # If it's a whole number (like 123.0), treat as integer
             integer_part = int(number)
-            return _format_integer_part(integer_part)
+            result = _format_integer_part(integer_part)
+            return _convert_digits_to_nepali(result) if lang == 'np' else result
         else:
             # Split into integer and decimal parts
             integer_part = int(number)
             decimal_part = str(number).split('.')[1]
             
             if integer_part == 0:
-                return f"0.{decimal_part}"
+                result = f"0.{decimal_part}"
+                return _convert_digits_to_nepali(result) if lang == 'np' else result
             else:
                 formatted_integer = _format_integer_part(integer_part)
-                return f"{formatted_integer}.{decimal_part}"
+                result = f"{formatted_integer}.{decimal_part}"
+                return _convert_digits_to_nepali(result) if lang == 'np' else result
     
     # Handle integer numbers
-    return _format_integer_part(number)
+    result = _format_integer_part(number)
+    return _convert_digits_to_nepali(result) if lang == 'np' else result
 
 
 def _format_integer_part(number):
