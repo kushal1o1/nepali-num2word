@@ -24,7 +24,7 @@ setup(
     name="nepali-num2word",
     version=version,
     author="Kushal",
-    author_email="kushal.developer@gmail.com", 
+    author_email="work.kusal@gmail.com", 
     description="Convert numbers to Nepali-style words and formatting",
     long_description=long_description,
     long_description_content_type="text/markdown",
