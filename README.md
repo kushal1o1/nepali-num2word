@@ -1,9 +1,11 @@
-# nepali-num2word
+
+<!-- logo -->
+<img style="display: block; margin: 0 auto;" src="./static/image/nepali-num2word.png" alt="Nepali Num2Word Logo" width="200"/>
 
 [![PyPI version](https://badge.fury.io/py/nepali-num2word.svg)](https://badge.fury.io/py/nepali-num2word)
 [![Python Support](https://img.shields.io/pypi/pyversions/nepali-num2word.svg)](https://pypi.org/project/nepali-num2word/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PyPI Downloads](https://static.pepy.tech/badge/nepali-num2word/month)](https://pepy.tech/projects/nepali-num2word)
+[![PyPI Downloads](https://static.pepy.tech/badge/nepali-num2word)](https://pepy.tech/projects/nepali-num2word)
 
 A comprehensive Python library for converting numbers to Nepali-style currency words with support for both English transliteration and Nepali Unicode (Devanagari script). Perfect for financial applications, educational tools, and any system requiring Nepali number formatting.
 
@@ -216,6 +218,9 @@ nepali-num2word/
 │   ├── main.py
 │   ├── format_main.py
 │   └── compact_main.py
+├── static/
+│   └── image/
+│       └── nepali-num2word.png
 ├── tests/
 │   ├── __init__.py
 │   ├── conftest.py
@@ -254,10 +259,9 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - [x] Nepali-style number formatting
 - [x] Compact number representation
 - [x] Comprehensive error handling
-- [ ] More natural phrasing for compound numbers
 - [ ] Reverse conversion (Nepali words → number)
-- [ ] Support for ordinal numbers
-- [ ] Date formatting in Nepali style
+
+
 
 ## 📊 Performance
 
@@ -295,4 +299,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made in Nepal 🇳🇵 | Created by [Kushal](https://github.com/kushal1o1)**
+**Made in Nepal  | Created by [Kushal1o1](https://github.com/kushal1o1)**
