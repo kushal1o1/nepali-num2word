@@ -1,11 +1,14 @@
 
 <!-- logo -->
-<img style="display: block; margin: 0 auto;" src="./static/image/nepali-num2word.png" alt="Nepali Num2Word Logo" width="200"/>
-
-[![PyPI version](https://badge.fury.io/py/nepali-num2word.svg)](https://badge.fury.io/py/nepali-num2word)
-[![Python Support](https://img.shields.io/pypi/pyversions/nepali-num2word.svg)](https://pypi.org/project/nepali-num2word/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PyPI Downloads](https://static.pepy.tech/badge/nepali-num2word)](https://pepy.tech/projects/nepali-num2word)
+<p align="center">
+  <img src="https://github.com/kushal1o1/nepali-num2word/blob/main/static/image/nepali-num2word.png?raw=true" alt="Nepali Num2Word Logo" width="200"/>
+</p>
+<p align="center">
+  <a href="https://badge.fury.io/py/nepali-num2word"><img src="https://badge.fury.io/py/nepali-num2word.svg" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/nepali-num2word/"><img src="https://img.shields.io/pypi/pyversions/nepali-num2word.svg" alt="Python Support"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://pepy.tech/projects/nepali-num2word"><img src="https://static.pepy.tech/badge/nepali-num2word" alt="PyPI Downloads"></a>
+</p>
 
 A comprehensive Python library for converting numbers to Nepali-style currency words with support for both English transliteration and Nepali Unicode (Devanagari script). Perfect for financial applications, educational tools, and any system requiring Nepali number formatting.
 
