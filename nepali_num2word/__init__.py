@@ -13,7 +13,7 @@ Main functions:
 
 from .core import convert_to_words, format_number, compact_number
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 __author__ = "Kushal"
 __email__ = "work.kusal@gmail.com"
 
