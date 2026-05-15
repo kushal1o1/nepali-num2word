@@ -262,7 +262,9 @@ def convert_to_words(number, lang="en"):
             return f"{result_parts[0]}{connector}{result_parts[1]}"
         else:
             return (
-                result_parts[0] if result_parts else ("शून्य" if lang == "np" else "zero")
+                result_parts[0]
+                if result_parts
+                else ("शून्य" if lang == "np" else "zero")
             )
 
     # Handle integer numbers
