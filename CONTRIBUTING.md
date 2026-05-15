@@ -2,16 +2,16 @@
 
 Thank you for your interest in contributing to `nepali-num2word`! This document provides guidelines and information for contributors.
 
-## 🎯 Ways to Contribute
+##  Ways to Contribute
 
-- 🐛 **Bug Reports**: Report issues or unexpected behavior
-- 💡 **Feature Requests**: Suggest new features or improvements
-- 📝 **Documentation**: Improve documentation, examples, or tutorials
-- 🔧 **Code Contributions**: Fix bugs, implement features, or optimize performance
-- 🌍 **Localization**: Help with Nepali language accuracy and cultural nuances
-- 🧪 **Testing**: Write tests, improve test coverage, or test edge cases
+-  **Bug Reports**: Report issues or unexpected behavior
+-  **Feature Requests**: Suggest new features or improvements
+-  **Documentation**: Improve documentation, examples, or tutorials
+-  **Code Contributions**: Fix bugs, implement features, or optimize performance
+-  **Localization**: Help with Nepali language accuracy and cultural nuances
+-  **Testing**: Write tests, improve test coverage, or test edge cases
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -33,10 +33,10 @@ Thank you for your interest in contributing to `nepali-num2word`! This document 
    ```bash
    # Create and activate virtual environment
    python -m venv venv
-   
+
    # On Windows
    venv\Scripts\activate
-   
+
    # On macOS/Linux
    source venv/bin/activate
    ```
@@ -45,7 +45,7 @@ Thank you for your interest in contributing to `nepali-num2word`! This document 
    ```bash
    # Install in development mode
    pip install -e .
-   
+
    # Install development dependencies
    pip install pytest pytest-cov black flake8 mypy
    ```
@@ -54,12 +54,12 @@ Thank you for your interest in contributing to `nepali-num2word`! This document 
    ```bash
    # Test the CLI
    python cli/main.py 123456 --lang np
-   
+
    # Run tests
    python -m pytest tests/
    ```
 
-## 📋 Development Workflow
+##  Development Workflow
 
 ### 1. Create a Feature Branch
 
@@ -148,7 +148,7 @@ git push origin feature/your-feature-name
 # Create a pull request on GitHub
 ```
 
-## 🔍 Code Style Guidelines
+##  Code Style Guidelines
 
 ### Python Style
 
@@ -162,14 +162,14 @@ git push origin feature/your-feature-name
 # Good example
 def convert_to_words(number: Union[int, float, str], lang: str = 'en') -> str:
     """Convert number to words in Nepali numbering system.
-    
+
     Args:
         number: Number to convert (int, float, or numeric string)
         lang: Language code ('en' for English, 'np' for Nepali)
-        
+
     Returns:
         Number converted to words
-        
+
     Raises:
         TypeError: If input type is invalid
         ValueError: If number is out of supported range
@@ -200,7 +200,7 @@ if not isinstance(number, (int, float, str)):
     )
 ```
 
-## 🧪 Testing Guidelines
+##  Testing Guidelines
 
 ### Test Structure
 
@@ -223,26 +223,26 @@ import pytest
 from nepali_num2word import convert_to_words
 
 class TestConvertToWords:
-    
+
     def test_basic_conversion(self):
         """Test basic number conversion."""
         assert convert_to_words(123) == "one hundred twenty-three"
         assert convert_to_words(1000) == "one thousand"
-    
+
     def test_nepali_unicode(self):
         """Test Nepali Unicode output."""
         assert convert_to_words(123, lang='np') == "एक सय तेइस"
-    
+
     def test_error_handling(self):
         """Test error conditions."""
         with pytest.raises(TypeError):
             convert_to_words(None)
-        
+
         with pytest.raises(ValueError):
             convert_to_words("invalid")
 ```
 
-## 🌍 Nepali Language Guidelines
+##  Nepali Language Guidelines
 
 ### Cultural Accuracy
 
@@ -256,7 +256,7 @@ class TestConvertToWords:
 - Include context for cultural or linguistic decisions
 - Test with various Nepali fonts and systems
 
-## 📖 Documentation Guidelines
+##  Documentation Guidelines
 
 ### README Updates
 
@@ -277,7 +277,7 @@ class TestConvertToWords:
 - Follow [Keep a Changelog](https://keepachangelog.com/) format
 - Include migration notes for breaking changes
 
-## 🚀 Release Process
+##  Release Process
 
 ### Version Numbering
 
@@ -295,7 +295,7 @@ We follow [Semantic Versioning](https://semver.org/):
 - [ ] GitHub release is created
 - [ ] PyPI package is published
 
-## 🎯 Feature Request Guidelines
+##  Feature Request Guidelines
 
 ### Before Submitting
 
@@ -320,7 +320,7 @@ If you have ideas about how to implement this.
 Any other relevant information.
 ```
 
-## 🐛 Bug Report Guidelines
+##  Bug Report Guidelines
 
 ### Bug Report Template
 
@@ -346,7 +346,7 @@ What you expected to happen.
 Any other context about the problem.
 ```
 
-## 🤝 Code Review Process
+##  Code Review Process
 
 ### For Contributors
 
@@ -362,7 +362,7 @@ Any other context about the problem.
 - Test the changes locally when possible
 - Provide clear, actionable feedback
 
-## 💬 Communication
+##  Communication
 
 ### Channels
 
@@ -377,18 +377,18 @@ Any other context about the problem.
 - Provide context for your questions
 - Search existing discussions before posting
 
-## 📜 License
+##  License
 
 By contributing to `nepali-num2word`, you agree that your contributions will be licensed under the MIT License.
 
-## 🙏 Recognition
+##  Recognition
 
 Contributors will be recognized in:
 - GitHub contributors list
 - README.md acknowledgments
 - Release notes (for significant contributions)
 
-## ❓ Questions?
+##  Questions?
 
 If you have questions about contributing:
 
@@ -397,4 +397,4 @@ If you have questions about contributing:
 3. Create a new discussion for general questions
 4. Create an issue for specific bugs or feature requests
 
-Thank you for contributing to `nepali-num2word`! 🇳🇵
+Thank you for contributing to `nepali-num2word`! 🇳🇵:)

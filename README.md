@@ -12,18 +12,18 @@
 
 A comprehensive Python library for converting numbers to Nepali-style currency words with support for both English transliteration and Nepali Unicode (Devanagari script). Perfect for financial applications, educational tools, and any system requiring Nepali number formatting.
 
-## ✨ Features
+## Features
 
-- **🔢 Number to Words Conversion**: Convert integers and floats to Nepali-style number words
-- **🇳🇵 Dual Language Support**: English transliteration and authentic Nepali Unicode (Devanagari)
-- **💰 Currency Support**: Automatic rupees and paise handling for decimal amounts
-- **📊 Nepali Number Formatting**: Format numbers with traditional Nepali comma placement (10,00,000)
-- **📦 Compact Representation**: Human-readable format (1.2 lakhs, 4.5 crores)
-- **⚡ CLI Tools**: Complete command-line interface suite
-- **🛡️ Robust Error Handling**: Comprehensive input validation and clear error messages
-- **➖ Negative Number Support**: Handles negative values seamlessly
+- **Number to Words Conversion**: Convert integers and floats to Nepali-style number words
+- **Dual Language Support**: English transliteration and authentic Nepali Unicode (Devanagari)
+- **Currency Support**: Automatic rupees and paise handling for decimal amounts
+- **Nepali Number Formatting**: Format numbers with traditional Nepali comma placement (10,00,000)
+- **Compact Representation**: Human-readable format (1.2 lakhs, 4.5 crores)
+- **CLI Tools**: Complete command-line interface suite
+- **Robust Error Handling**: Comprehensive input validation and clear error messages
+- **Negative Number Support**: Handles negative values seamlessly
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -57,7 +57,7 @@ print(compact_number(1234567))
 # Output: 12.3 lakhs
 ```
 
-## 📖 Documentation
+##  Documentation
 
 ### API Reference
 
@@ -164,9 +164,9 @@ nepalicompact 42000000 --lang np
 The library provides comprehensive error handling with clear, actionable error messages:
 
 ### Supported Input Types
-- ✅ Integers: `123`, `-456`
-- ✅ Floats: `123.45`, `-67.89`
-- ✅ Numeric strings: `"123"`, `"123.45"`, `"-456"`
+-  Integers: `123`, `-456`
+-  Floats: `123.45`, `-67.89`
+-  Numeric strings: `"123"`, `"123.45"`, `"-456"`
 
 ### Error Examples
 ```python
@@ -181,7 +181,7 @@ convert_to_words("hello")       # ValueError: 'hello' is not a valid number
 convert_to_words(1000000000)    # ValueError: Number too large (max: 999,999,999)
 ```
 
-## 🎯 Use Cases
+##  Use Cases
 
 - **Financial Applications**: Convert amounts to words for checks, invoices, and receipts
 - **Educational Software**: Teaching Nepali number systems and currency
@@ -189,7 +189,7 @@ convert_to_words(1000000000)    # ValueError: Number too large (max: 999,999,999
 - **Banking Software**: Amount verification and display in Nepali format
 - **E-commerce**: Price display in traditional Nepali numbering
 
-## 🔧 Development
+##  Development
 
 ### Local Development Setup
 
@@ -238,7 +238,7 @@ nepali-num2word/
 └── requirements-dev.txt
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
 
@@ -253,20 +253,11 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 7. Push to your branch (`git push origin feature/amazing-feature`)
 8. Open a Pull Request
 
-## 📋 Roadmap
-
-- [x] Integer to words in Nepali format
-- [x] Decimal (paise) support
-- [x] Nepali Unicode output
-- [x] CLI tool support
-- [x] Nepali-style number formatting
-- [x] Compact number representation
-- [x] Comprehensive error handling
-- [ ] Reverse conversion (Nepali words → number)
 
 
 
-## 📊 Performance
+
+##  Performance
 
 The library is optimized for performance with minimal dependencies:
 - Zero external dependencies for core functionality
@@ -274,27 +265,19 @@ The library is optimized for performance with minimal dependencies:
 - Comprehensive input validation
 - Memory-efficient processing
 
-## 🌍 Language Support
 
-| Feature | English | Nepali Unicode |
-|---------|---------|----------------|
-| Number to Words | ✅ | ✅ |
-| Currency (Rupees/Paise) | ✅ | ✅ |
-| Negative Numbers | ✅ | ✅ |
-| Compact Format | ✅ | ✅ |
-| CLI Support | ✅ | ✅ |
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Built with ❤️ for the Nepali community
 - Inspired by the need for proper Nepali number formatting in software applications
 - Thanks to all contributors who help improve this library
 
-## 📞 Support
+##  Support
 
 - **Issues**: [GitHub Issues](https://github.com/kushal1o1/nepali-num2word/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/kushal1o1/nepali-num2word/discussions)
