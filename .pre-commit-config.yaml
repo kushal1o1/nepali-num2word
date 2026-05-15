@@ -11,11 +11,10 @@ repos:
       - id: mixed-line-ending
 
   - repo: https://github.com/psf/black
-    rev: 24.1.1
+    rev: 26.3.1
     hooks:
       - id: black
         language_version: python3
-        args: ['--target-version=py38']
 
   - repo: https://github.com/PyCQA/flake8
     rev: 7.0.0
