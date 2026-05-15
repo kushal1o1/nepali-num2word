@@ -1,3 +1,1 @@
-"""
-Test package for nepali-num2word.
-"""
+"""Test package for nepali-num2word."""

@@ -1,6 +1,4 @@
-"""
-Pytest configuration and fixtures for nepali-num2word tests.
-"""
+"""Pytest configuration and fixtures for nepali-num2word tests."""
 
 import pytest
 

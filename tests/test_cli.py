@@ -1,59 +1,54 @@
-"""
-Tests for CLI functionality of nepali-num2word package.
-"""
+"""Tests for CLI functionality of nepali-num2word package."""
 
 import subprocess
 import sys
 from pathlib import Path
+
 import pytest
 
 
 class TestCLI:
     """Test cases for command-line interface."""
-    
+
     def run_cli(self, args):
-        """Helper method to run CLI commands."""
+        """Execute CLI command and return result."""
         cli_path = Path(__file__).parent.parent / "cli" / "main.py"
         cmd = [sys.executable, str(cli_path)] + args
-        
+
         try:
             result = subprocess.run(
-                cmd, 
-                capture_output=True, 
-                text=True, 
-                cwd=Path(__file__).parent.parent
+                cmd, capture_output=True, text=True, cwd=Path(__file__).parent.parent
             )
             return result.returncode, result.stdout.strip(), result.stderr.strip()
         except Exception as e:
             return -1, "", str(e)
-    
+
     def test_cli_basic_number(self):
-        """Test CLI with basic number."""
+        """Run CLI with basic number and verify output."""
         returncode, stdout, stderr = self.run_cli(["120000"])
         # Note: CLI might not work due to import issues in test environment
         # This test documents the expected behavior
         if returncode == 0:
             assert stdout == "one lakh twenty thousand"
-    
+
     def test_cli_decimal_number(self):
         """Test CLI with decimal number."""
         returncode, stdout, stderr = self.run_cli(["123.45"])
         if returncode == 0:
             assert "one hundred twenty-three rupees and forty-five paise" in stdout
-    
+
     def test_cli_language_parameter(self):
         """Test CLI with language parameter."""
         returncode, stdout, stderr = self.run_cli(["120000", "--lang", "en"])
         if returncode == 0:
             assert stdout == "one lakh twenty thousand"
-    
+
     def test_cli_nepali_language(self):
         """Test CLI with Nepali language support."""
         returncode, stdout, stderr = self.run_cli(["120000", "--lang", "np"])
         if returncode == 0:
             assert stdout == "एक लाख बीस हजार"
 
-    
     def test_cli_invalid_number(self):
         """Test CLI with invalid number format."""
         returncode, stdout, stderr = self.run_cli(["invalid"])
@@ -65,29 +60,24 @@ class TestCLI:
             assert returncode != 0
 
 
-
-
 class TestFormatCLI:
     """Test cases for format CLI."""
-    
+
     def run_format_cli(self, args):
-        """Helper method to run format CLI commands."""
+        """Execute format CLI command and return result."""
         cli_path = Path(__file__).parent.parent / "cli" / "format_main.py"
         cmd = [sys.executable, str(cli_path)] + args
-        
+
         try:
             result = subprocess.run(
-                cmd, 
-                capture_output=True, 
-                text=True, 
-                cwd=Path(__file__).parent.parent
+                cmd, capture_output=True, text=True, cwd=Path(__file__).parent.parent
             )
             return result.returncode, result.stdout.strip(), result.stderr.strip()
         except Exception as e:
             return -1, "", str(e)
-    
+
     def test_format_cli_help(self):
-        """Test format CLI help message."""
+        """Verify format CLI help message displays correctly."""
         returncode, stdout, stderr = self.run_format_cli(["--help"])
         if returncode == 0:
             assert "Format numbers" in stdout or "Format numbers" in stderr
@@ -114,23 +104,20 @@ class TestFormatCLI:
 
 class TestCompactCLI:
     """Test cases for compact CLI."""
-    
+
     def run_compact_cli(self, args):
-        """Helper method to run compact CLI commands."""
+        """Execute compact CLI command and return result."""
         cli_path = Path(__file__).parent.parent / "cli" / "compact_main.py"
         cmd = [sys.executable, str(cli_path)] + args
-        
+
         try:
             result = subprocess.run(
-                cmd, 
-                capture_output=True, 
-                text=True, 
-                cwd=Path(__file__).parent.parent
+                cmd, capture_output=True, text=True, cwd=Path(__file__).parent.parent
             )
             return result.returncode, result.stdout.strip(), result.stderr.strip()
         except Exception as e:
             return -1, "", str(e)
-    
+
     def test_compact_cli_basic(self):
         """Test compact CLI with basic number."""
         returncode, stdout, stderr = self.run_compact_cli(["4200000"])
