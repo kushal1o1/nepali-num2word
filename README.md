@@ -159,7 +159,7 @@ nepalicompact 42000000 --lang np
 # Output: ४.२ करोड
 ```
 
-## 🛡️ Error Handling
+##  Error Handling
 
 The library provides comprehensive error handling with clear, actionable error messages:
 

@@ -25,7 +25,7 @@ jobs:
           pip install flake8 black isort mypy
 
       - name: Run black check
-        run: black --check nepali_num2word/ cli/ tests/
+        run: black --check --target-version py38 nepali_num2word/ cli/ tests/
 
       - name: Run isort check
         run: isort --check-only nepali_num2word/ cli/ tests/
