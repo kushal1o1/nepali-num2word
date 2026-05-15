@@ -1,22 +1,23 @@
-"""
-Setup configuration for nepali-num2word package.
-"""
+"""Setup configuration for nepali-num2word package."""
 
-from setuptools import setup, find_packages
 from pathlib import Path
+
+from setuptools import find_packages, setup
 
 # Read README file
 this_directory = Path(__file__).parent
-long_description = (this_directory / "README.md").read_text(encoding='utf-8')
+long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 
-# Read version from __init__.py file without importing
+
 def get_version():
+    """Get version from __init__.py file without importing."""
     version_file = this_directory / "nepali_num2word" / "__init__.py"
-    version_content = version_file.read_text(encoding='utf-8')
-    for line in version_content.split('\n'):
-        if line.startswith('__version__'):
-            return line.split('=')[1].strip().strip('"').strip("'")
+    version_content = version_file.read_text(encoding="utf-8")
+    for line in version_content.split("\n"):
+        if line.startswith("__version__"):
+            return line.split("=")[1].strip().strip('"').strip("'")
     raise RuntimeError("Unable to find version string.")
+
 
 version = get_version()
 
@@ -24,7 +25,7 @@ setup(
     name="nepali-num2word",
     version=version,
     author="Kushal",
-    author_email="work.kusal@gmail.com", 
+    author_email="work.kusal@gmail.com",
     description="Convert numbers to Nepali-style words and formatting",
     long_description=long_description,
     long_description_content_type="text/markdown",
